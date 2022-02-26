@@ -16,7 +16,8 @@ namespace CabInvoiceGenerator
         {
             INVALID_TIME,
             INVALID_DISTANCE,
-            NULL_RIDES
+            NULL_RIDES,
+            INVALID_RIDETYPES
         }
         //paramaterized constructor for custom exception
         public CabInvoiceGeneratorException(ExceptionType exceptionType,string msg):base(msg)
