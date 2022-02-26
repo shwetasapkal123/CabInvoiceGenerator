@@ -112,6 +112,18 @@ namespace CabInvoiceGeneratorTest
                     Assert.AreEqual(expected, ex.Message);
                 }
             }
+            //UC4
+            [TestMethod]
+            [TestCategory("Enhanced Invoice For Normal Ride")]
+            public void GivenUserId_ShouldReturnInvoiceForUser()
+            {
+                RideType[] rides = { new RideType(5,3.0), new RideType(10,4.0) };
+                double totalfare = 85.0;
+                InvoiceSummary invoiceSummary = new InvoiceSummary(rides.Length, totalfare);
+                User expected = new User("Shweta", invoiceSummary);
+                User actual = normal.InvoiceService(rides, "Shweta");
+                Assert.AreEqual(expected, actual);
+            }
         }
     }
 }
