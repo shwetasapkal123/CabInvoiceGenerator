@@ -13,8 +13,12 @@ namespace CabInvoiceGenerator
             Console.WriteLine("WEL-COME to Cab Service");
 
             CabInvoiceGeneratorCalculateFare cabInvoiceGenerator = new CabInvoiceGeneratorCalculateFare();
-            double calculatedFare=cabInvoiceGenerator.CalculateFare(0, 25);
+            double calculatedFare=cabInvoiceGenerator.CalculateFare(10, 25);
             Console.WriteLine(calculatedFare);
+
+            RideType[] multiRides = { new RideType(20, 15), new RideType(20, 25) };
+            Console.WriteLine("Aggregate total fare is: ");
+            Console.Write(cabInvoiceGenerator.CalculateAgreegateFare(multiRides));
             Console.ReadLine();
         }
     }

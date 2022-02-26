@@ -7,17 +7,9 @@ namespace CabInvoiceGeneratorTest
     [TestClass]
     public class CabInvoiceTestCases
     {
-        //Arrange
-        //public CabInvoiceGeneratorCalculateFare calculatefare;
-
-        //[TestInitialize]
-        //public void SetUp()
-        //{
-        //   double fareCalculated = calculatefare.CalculateFare(10, 15);
-        //}
         [TestMethod]
         [TestCategory("CalculateFare")]
-        [DataRow(10,15,160)]
+        [DataRow(10,15,160)]        //time distance expected
         public void GivenPositiveTimeAndDateReturnTotalFare(int time,double distance,double expected)
         {
             //Arrange
@@ -38,6 +30,30 @@ namespace CabInvoiceGeneratorTest
             var invalidDistanceException = Assert.ThrowsException<CabInvoiceGeneratorException>(() => calculatefare.CalculateFare(18, -3));
             Assert.AreEqual(CabInvoiceGeneratorException.ExceptionType.INVALID_DISTANCE, invalidDistanceException.exceptionType);
         }
+        // TC2.1 - Given multiple rides should return aggregate fare
+        [TestMethod]
+        [TestCategory("Multiple Rides")]
+        public void GivenMultipleRidesReturnAggregateFare()
+        {
+            //Arrange
+            CabInvoiceGeneratorCalculateFare calculateMulRidefare = new CabInvoiceGeneratorCalculateFare();
+            double actual, expected = 320;
+            RideType[] cabRides = { new RideType(10, 15), new RideType(10, 15) };
+            //Act
+            actual = calculateMulRidefare.CalculateAgreegateFare(cabRides);
+            //Assert
+            Assert.AreEqual(actual, expected);
+        }
 
+        // TC2.2 - given no rides return custom exception
+        [TestMethod]
+        [TestCategory("Multiple Rides")]
+        public void GivenNoRidesReturnCustomException()
+        {
+            CabInvoiceGeneratorCalculateFare calculateMulRidefare = new CabInvoiceGeneratorCalculateFare();
+            RideType[] cabRides = { };
+            var nullRidesException = Assert.ThrowsException<CabInvoiceGeneratorException>(() => calculateMulRidefare.CalculateAgreegateFare(cabRides));
+            Assert.AreEqual(CabInvoiceGeneratorException.ExceptionType.NULL_RIDES, nullRidesException.exceptionType);
+        }
     }
 }
