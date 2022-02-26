@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
-#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class InvoiceSummary
-#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         //Variables.
         public double totalFare, avgFare;
